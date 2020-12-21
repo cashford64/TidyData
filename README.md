@@ -65,14 +65,14 @@ Use rbind() to combine the test and train data groups together.
 completeSet <- rbind(testSet, trainSet)
 rm(testSet, trainSet)
 ```
-Add descriptive column names, using **Subject** for the first column, **Activity** for the second column, and the contents of 'features' for the remaining columns. The next line replaces the Activity ID with the Activity name, using 'activities' as a lookup table.
+Add descriptive column names, using **"Subject"** for the first column, **"Activity"** for the second column, and the contents of 'features' for the remaining columns. The next line of code simply replaces the Activity IDs with the corresponding Activity name, using 'activities' as the lookup table.
 ```R
 ## Add descriptive column names and replace activity codes with activity name
 names(completeSet) <- c("Subject", "Activity", as.character(features[,2]))
 completeSet[,2] <- activities[completeSet[,2],2]
 rm(activities, features)
 ```
-Use grepl() to isolate the columns whose names include the text "mean" or "std", as well as the first two columns (**Subject** and **Activity**), reducing the number of variables from 561 to 88 in the adjusted data table.
+Use grepl() to isolate the columns whose names include the text "mean" or "std", as well as the first two columns (**"Subject"** and **"Activity"**), reducing the number of variables from 561 to 88 in the adjusted data table.
 ```R
 ## Subset the Data Set to include only columns with mean or std data
 completeSet <- completeSet[grepl("subject|activity|std|mean", names(completeSet), ignore.case = TRUE)]
